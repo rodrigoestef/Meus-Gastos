@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'pages/graphics.dart';
 import 'pages/table.dart';
+import 'pages/formNewItem.dart';
+import 'package:animations/animations.dart';
 
 void main() {
   runApp(
@@ -42,6 +44,15 @@ class _HomeState extends State<Home> {
               icon: Icon(Icons.assessment), label: "Grafico"),
           BottomNavigationBarItem(icon: Icon(Icons.reorder), label: "Tabela"),
         ],
+      ),
+      floatingActionButton: OpenContainer(
+        closedBuilder: (BuildContext c, VoidCallback action) =>
+            FloatingActionButton(
+          onPressed: action,
+          child: Icon(Icons.add),
+        ),
+        openBuilder: (BuildContext c, VoidCallback action) => FormNewItem(),
+        tappable: false,
       ),
     );
   }
