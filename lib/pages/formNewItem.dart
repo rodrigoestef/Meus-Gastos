@@ -34,25 +34,35 @@ class FormNewItem extends StatelessWidget {
                       Container(
                         width: 120,
                         height: 40,
-                        child: Flexible(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'data',
-                              border: OutlineInputBorder(),
+                        child: Flex(
+                          direction: Axis.horizontal,
+                          children: [
+                            Flexible(
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  labelText: 'data',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                       Container(
                         width: 140,
                         height: 40,
-                        child: Flexible(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'valor',
-                              border: OutlineInputBorder(),
+                        child: Flex(
+                          direction: Axis.horizontal,
+                          children: [
+                            Flexible(
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  labelText: 'valor',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ],
