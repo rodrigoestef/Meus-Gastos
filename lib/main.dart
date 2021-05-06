@@ -22,6 +22,8 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
+const double _fabDimension = 56.0;
+
 class _HomeState extends State<Home> {
   static const List<Widget> _page = <Widget>[Graphics(), TablePage()];
   int _indexPage = 0;
@@ -56,13 +58,18 @@ class _HomeState extends State<Home> {
         ],
       ),
       floatingActionButton: OpenContainer(
-        closedBuilder: (BuildContext c, VoidCallback action) =>
-            FloatingActionButton(
-          onPressed: action,
-          child: Icon(Icons.add),
+        closedColor: Colors.green,
+        closedShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(_fabDimension)),
         ),
-        openBuilder: (BuildContext c, VoidCallback action) => FormNewItem(),
-        tappable: false,
+        closedBuilder: (BuildContext c, VoidCallback _) => SizedBox(
+          height: _fabDimension,
+          width: _fabDimension,
+          child: Center(
+            child: Icon(Icons.add, color: Colors.white),
+          ),
+        ),
+        openBuilder: (BuildContext c, VoidCallback _) => FormNewItem(),
       ),
     );
   }
