@@ -31,7 +31,17 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('Meus Gastos'),
       ),
-      body: _page[_indexPage],
+      body: PageTransitionSwitcher(
+        transitionBuilder: (Widget child, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return FadeThroughTransition(
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          );
+        },
+        child: _page[_indexPage],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _indexPage,
         onTap: (int index) {
