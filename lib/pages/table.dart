@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../repositories/Table.dart';
+import '../mask.dart';
 
 class DataSorce extends DataTableSource {
   DataSorce(this.data, this.callback) : assert(data != null);
@@ -14,7 +15,7 @@ class DataSorce extends DataTableSource {
         Text(row[columns.value]),
       ),
       DataCell(
-        Text(row[columns.date]),
+        Text(Mask.date(row[columns.date])),
       ),
       DataCell(
         Text(row[columns.description]),
@@ -51,13 +52,19 @@ class TableState extends State<TablePage> {
     setState(() {
       list.removeAt(index);
     });
-    Database base = Database();
-    base.removeById(row[columns.id]);
+
+    DatabaseTable base = DatabaseTable();
+    await base.init();
+    await base.removeById(row[columns.id]);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         action: SnackBarAction(
             label: "Cancelar",
             onPressed: () {
-              print('a');
+              base.cancelDelete(row[columns.id]);
+              setState(() {
+                list.add(row);
+                list.sort((a, b) => a[columns.id].compareTo(b[columns.id]));
+              });
             }),
         content: Text('Linha deletada')));
   }
@@ -68,12 +75,13 @@ class TableState extends State<TablePage> {
     setState(() {
       isLoading = true;
     });
-    Database base = Database();
-    base.getTable({}).then((value) => setState(() {
-          list = [...value];
-          isLoading = false;
-        }));
-    base.destroy();
+    DatabaseTable base = DatabaseTable();
+    base.init().then((value) {
+      base.getTable({}).then((value) => setState(() {
+            list = [...value];
+            isLoading = false;
+          }));
+    });
   }
 
   @override
@@ -84,7 +92,7 @@ class TableState extends State<TablePage> {
           )
         : SingleChildScrollView(
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              // margin: EdgeInsets.symmetric(horizontal: 20),
               child: PaginatedDataTable(
                 header: Text('Relatório'),
                 rowsPerPage: this.list.length > 10
