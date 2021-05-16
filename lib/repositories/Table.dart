@@ -33,6 +33,12 @@ class DatabaseTable {
     });
   }
 
+  Future<void> insertRow(
+      {String value, String date, String description}) async {
+    await db.rawInsert(
+        'INSERT INTO gastos (value,description,date) VALUES ($value,"$description","$date")');
+  }
+
   Future<void> removeById(String id) async {
     await db.rawUpdate("UPDATE gastos set deleted = 1 WHERE id = $id");
   }
