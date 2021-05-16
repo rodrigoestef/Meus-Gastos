@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'pages/graphics.dart';
 import 'pages/table.dart';
 import 'pages/formNewItem.dart';
@@ -11,6 +12,10 @@ void main() {
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
+        localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+        supportedLocales: [
+          Locale('pt'),
+        ],
         home: Home()),
   );
 }
