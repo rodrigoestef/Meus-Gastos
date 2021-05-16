@@ -1,4 +1,11 @@
+import 'package:intl/intl.dart';
+
 class Mask {
+  static String formatDate(DateTime date) {
+    var format = DateFormat('yyyy-MM-dd');
+    return format.format(date);
+  }
+
   static String date(String date) {
     var element = date.split(' ')[0].split('-');
     return element[2] + '/' + element[1] + '/' + element[0];
