@@ -31,6 +31,8 @@ class DatabaseTable {
       //     'INSERT INTO gastos (value,description,date) VALUES (2,"teste","2020-01-01")');
       // await db.rawInsert(
       //     'INSERT INTO gastos (value,description,date) VALUES (3,"teste","2020-01-01")');
+      await db.execute(
+          "CREATE TRIGGER IF NOT EXISTS  del BEFORE INSERT ON gastos BEGIN DELETE FROM gastos WHERE date < DATE('now','-1 year'); END;");
     });
   }
 
