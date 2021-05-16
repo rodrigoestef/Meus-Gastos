@@ -57,20 +57,22 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(icon: Icon(Icons.reorder), label: "Tabela"),
         ],
       ),
-      floatingActionButton: OpenContainer(
-        closedColor: Colors.green,
-        closedShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(_fabDimension)),
-        ),
-        closedBuilder: (BuildContext c, VoidCallback _) => SizedBox(
-          height: _fabDimension,
-          width: _fabDimension,
-          child: Center(
-            child: Icon(Icons.add, color: Colors.white),
-          ),
-        ),
-        openBuilder: (BuildContext c, VoidCallback _) => FormNewItem(),
-      ),
+      floatingActionButton: _indexPage == 0
+          ? OpenContainer(
+              closedColor: Colors.green,
+              closedShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(_fabDimension)),
+              ),
+              closedBuilder: (BuildContext c, VoidCallback _) => SizedBox(
+                height: _fabDimension,
+                width: _fabDimension,
+                child: Center(
+                  child: Icon(Icons.add, color: Colors.white),
+                ),
+              ),
+              openBuilder: (BuildContext c, VoidCallback _) => FormNewItem(),
+            )
+          : null,
     );
   }
 }
