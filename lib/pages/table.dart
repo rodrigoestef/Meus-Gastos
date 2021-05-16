@@ -95,6 +95,33 @@ class TableState extends State<TablePage> {
               // margin: EdgeInsets.symmetric(horizontal: 20),
               child: PaginatedDataTable(
                 header: Text('Relatório'),
+                actions: [
+                  IconButton(
+                    icon: Icon(Icons.filter_alt),
+                    onPressed: () async {
+                      var range = await showDateRangePicker(
+                          context: context,
+                          firstDate:
+                              DateTime.now().subtract(Duration(days: 365)),
+                          lastDate: DateTime.now());
+                      if (range.runtimeType == DateTimeRange) {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        DatabaseTable db = DatabaseTable();
+                        await db.init();
+                        var _list = await db.getTable({
+                          filters.beginDate: Mask.formatDate(range.start),
+                          filters.endDate: Mask.formatDate(range.end)
+                        });
+                        setState(() {
+                          list = _list;
+                          isLoading = false;
+                        });
+                      }
+                    },
+                  )
+                ],
                 rowsPerPage: this.list.length > 10
                     ? 10
                     : this.list.length > 0
