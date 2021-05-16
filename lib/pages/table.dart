@@ -12,7 +12,7 @@ class DataSorce extends DataTableSource {
     var row = data[index];
     return DataRow.byIndex(index: index, cells: [
       DataCell(
-        Text(row[columns.value]),
+        Text(Mask.datagridMoney(row[columns.value])),
       ),
       DataCell(
         Text(Mask.date(row[columns.date])),
