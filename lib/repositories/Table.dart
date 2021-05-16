@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import '../mask.dart';
 
 enum columns {
   id,
@@ -49,10 +50,20 @@ class DatabaseTable {
 
   Future<List<Map<columns, String>>> getTable(
       Map<filters, String> filter) async {
-    // String filter = '';
-    // filter = filter[filters.id].runtimeType == String ? "and id = " : '';
+    String fil = '';
+    fil = filter[filters.id].runtimeType == String
+        ? " and id = ${filter[filters.id]}"
+        : '';
+
+    String today = Mask.formatDate(DateTime.now());
+    String yesterday =
+        Mask.formatDate(DateTime.now().subtract(Duration(days: 30)));
+    fil = filter[filters.beginDate].runtimeType == String ||
+            filter[filters.endDate].runtimeType == String
+        ? " and date BETWEEN '${filter[filters.beginDate]}' AND '${filter[filters.endDate]}'"
+        : " and date BETWEEN '$yesterday' AND '$today'";
     List<Map<String, Object>> res =
-        await db.rawQuery('SELECT * FROM gastos WHERE deleted=0');
+        await db.rawQuery('SELECT * FROM gastos WHERE deleted=0' + fil);
     return res
         .map((e) => {
               columns.id: "${e['id']}",
