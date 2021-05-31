@@ -32,6 +32,7 @@ dependencies:
   animations: ^2.0.0
   sqflite: ^2.0.0+3
   intl: ^0.17.0
+  charts_flutter: ^0.10.0
 
 dev_dependencies:
   flutter_test:

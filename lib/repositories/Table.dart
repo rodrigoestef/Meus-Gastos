@@ -8,6 +8,10 @@ enum columns {
   description,
   date,
 }
+enum pie {
+  disponivel,
+  usado,
+}
 
 enum filters {
   id,
@@ -48,6 +52,23 @@ class DatabaseTable {
 
   Future<void> cancelDelete(String id) async {
     await db.rawUpdate("UPDATE gastos set deleted = 0 WHERE id = $id");
+  }
+
+  Future<Map<pie, int>> getPieData() async {
+    var now = DateTime.now();
+    String firtsDayMonth = Mask.formatDate(DateTime(now.year, now.month));
+    var disponivel = await db.rawQuery(
+        "SELECT SUM(value) as valor FROM gastos WHERE deleted=0 and date >= '$firtsDayMonth' and value >0");
+    var usado = await db.rawQuery(
+        "SELECT SUM(value) as valor FROM gastos WHERE deleted=0 and date >= '$firtsDayMonth' and value <0");
+
+    return {
+      pie.disponivel: disponivel[0]['valor'].runtimeType == Null
+          ? 0
+          : disponivel[0]['valor'],
+      pie.usado:
+          usado[0]['valor'].runtimeType == Null ? 0 : (-1) * usado[0]['valor'],
+    };
   }
 
   Future<List<Map<columns, String>>> getTable(
