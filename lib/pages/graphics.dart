@@ -27,9 +27,9 @@ class GraphicsState extends State<Graphics> {
     await db.init();
     var valores = await db.getPieData();
     final data = [
-      new CharsData('disponivel', valores[pie.disponivel] - valores[pie.usado],
+      new CharsData('Disponível', valores[pie.disponivel] - valores[pie.usado],
           Colors.green),
-      new CharsData('usado', valores[pie.usado], Colors.red),
+      new CharsData('Usado', valores[pie.usado], Colors.red),
     ];
 
     setState(() {
@@ -95,7 +95,7 @@ class GraphicsState extends State<Graphics> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'Disponinvel: R\$ $disponivel',
+                          'Disponível: R\$ $disponivel',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       )
