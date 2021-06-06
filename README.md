@@ -1,16 +1,13 @@
-# meusgastos
+# Meus Gastos
 
-A new Flutter project.
+Este aplicativo torna possível o controle de gastos e ganhos. Com ele é possível registrar todo valor que você recebe ou gasta, visualizando a informação de forma clara e simples exibida em um gráfico. O aplicativo também informa quando você ultrapassa o orçamento do mês. Os dados ficam disponíveis em tabela por até um ano para que o usuário possa acompanhar e comparar seus gastos, visando melhor controle financeiro e o gráfico é atualizado a cada mês. 
 
-## Getting Started
+# Imagens
 
-This project is a starting point for a Flutter application.
+![pagina principal](https://user-images.githubusercontent.com/59934575/120908899-946ac380-c645-11eb-956d-3b2c518dec90.png) 
 
-A few resources to get you started if this is your first Flutter project:
+![pagina tabela](https://user-images.githubusercontent.com/59934575/120908965-2ffc3400-c646-11eb-99bc-83faf20b3112.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![linha deletada](https://user-images.githubusercontent.com/59934575/120908978-54581080-c646-11eb-8c5b-af2e83e7c7ea.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![pagina de cadastro com dados](https://user-images.githubusercontent.com/59934575/120908989-68037700-c646-11eb-84eb-5e9d7f3d9fa4.png)
